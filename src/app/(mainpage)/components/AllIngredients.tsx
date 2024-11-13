@@ -1,6 +1,11 @@
 import dayjs from "dayjs";
 import LineChart from "./LineChart";
 import { faker } from "@faker-js/faker";
+import { GoLinkExternal } from "react-icons/go";
+import Link from "next/link";
+import { PiBreadBold } from "react-icons/pi";
+import { GiMeat } from "react-icons/gi";
+import { FaDroplet } from "react-icons/fa6";
 
 export default function AllIngredients({ search }: { search: string }) {
   const dateCountArray = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
@@ -10,17 +15,90 @@ export default function AllIngredients({ search }: { search: string }) {
   });
   return (
     <div className="bg-base-100 py-4 px-8 flex flex-col gap-4 w-full">
-      <div className="flex items-center">
+      <div className="flex flex-col gap-2 md:flex-row items-center">
         <p className="text-3xl font-bold flex-1">ภาพรวมวัตถุดิบ</p>
         <p className="text-xs">
-          ข้อมูลล่าสุด {dayjs().format("DD/MM/YYYY HH:mm")}
+          ข้อมูลล่าสุด {dayjs().format("DD-MM-YYYY HH:mm")}
         </p>
       </div>
-      <div className="flex gap-4">
-        <div className="h-[160px] w-1/3 bg-base-300 rounded-xl"></div>
-        <div className="h-[160px] w-1/3 bg-base-300 rounded-xl"></div>
-        <div className="h-[160px] w-1/3 bg-base-300 rounded-xl"></div>
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="stats stats-vertical md:stats-horizontal shadow">
+          <div className="stat">
+            <div className="stat-figure text-red-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="inline-block h-8 w-8 stroke-current"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <div className=" text-red-500 stat-title">Maximum YOY</div>
+            <div className=" text-red-500 stat-value text-red-500">+3.1%</div>
+            <div className=" text-red-500 stat-desc">ข้าวโพด (Corn)</div>
+          </div>
+
+          <div className="stat">
+            <div className="stat-figure text-green-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="inline-block h-8 w-8 stroke-current"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <div className="stat-title text-green-500">Minimum YOY</div>
+            <div className="stat-value text-green-500">-2.5%</div>
+            <div className="stat-desc text-green-500">
+              กากถั่วเหลือง (Soybean)
+            </div>
+          </div>
+        </div>
+        <p className="text-xl font-bold"> Suggestion</p>
+        <div className="stats stats-vertical md:stats-horizontal shadow">
+          <div className="stat">
+            <div className="stat-title flex gap-2">
+              <PiBreadBold width={80} /> Carbohydrate
+            </div>
+            <div className="stat-value">Corn</div>
+            <div className="stat-desc">
+              {INGREDIENT_DATA.Corn.price[13]} บาท / ตัน
+            </div>
+          </div>
+          <div className="stat">
+            <div className="stat-title flex gap-2">
+              <GiMeat width={80} /> Protein
+            </div>
+            <div className="stat-value">Fish</div>
+            <div className="stat-desc">
+              {INGREDIENT_DATA.FishMeal.price[13]} บาท / ตัน
+            </div>
+          </div>
+          <div className="stat">
+            <div className="stat-title flex gap-2">
+              <FaDroplet width={80} /> Fat
+            </div>
+            <div className="stat-value">Flaxseed</div>
+            <div className="stat-desc">
+              {INGREDIENT_DATA.Flaxseed.price[13]} บาท / ตัน
+            </div>
+          </div>
+        </div>
       </div>
+      <div className="gap-4 flex flex-col">
       {Object.values(INGREDIENT_DATA).map((ingredient) => {
         if (
           search &&
@@ -31,20 +109,29 @@ export default function AllIngredients({ search }: { search: string }) {
         return (
           <div
             key={ingredient.name}
-            className="flex items-center gap-4 border-2 border-blue-200 rounded-xl"
+            className="flex items-center gap-4 border-2 border-blue-200 rounded-xl whitespace-nowrap overflow-x-scroll"
           >
-            <div className="flex-1 border-r-2 border-blue-100">
+            <div className="md:flex-1 border-r-2 border-blue-100">
               <div className="h-[240px] w-full rounded-xl p-4">
                 <div className="flex gap-4 justify-between">
                   <div className="flex gap-4">
                     <p className="font-semibold">
                       {ingredient.thaiName}: ({ingredient.name}){" "}
                     </p>
+
                     <div className="badge badge-outline">
                       <p>{ingredient.source}</p>
                     </div>
                   </div>
-                  <p>ราคาวันนี้ {ingredient.price[13]} บาท/ตัน</p>
+                  <div className="flex gap-4">
+                    <p>ราคาวันนี้ {ingredient.price[13]} บาท / ตัน</p>
+                    <Link
+                      href={`/ingredients/${ingredient.name.toLowerCase()}`}
+                      target="_blank"
+                    >
+                      <GoLinkExternal className="hover:cursor-pointer" />
+                    </Link>
+                  </div>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="table">
@@ -92,6 +179,7 @@ export default function AllIngredients({ search }: { search: string }) {
           </div>
         );
       })}
+      </div>
     </div>
   );
 }

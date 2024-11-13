@@ -13,7 +13,7 @@ export default function IngredientInformation({
   const datasets = [
     {
       label: dayjs().subtract(1, "year").format("YYYY"),
-      data: Array.from({ length: 12 }, (_, i) =>
+      data: Array.from({ length: 12 }, () =>
         faker.number.float({ min: 4, max: 13, fractionDigits: 2 })
       ),
       fill: false,
@@ -22,7 +22,7 @@ export default function IngredientInformation({
     },
     {
       label: dayjs().format("YYYY"),
-      data: Array.from({ length: 12 }, (_, i) =>
+      data: Array.from({ length: 12 }, () =>
         faker.number.float({ min: 4, max: 13, fractionDigits: 2 })
       ),
       fill: false,
@@ -35,9 +35,7 @@ export default function IngredientInformation({
       <div className="flex flex-col gap-2 md:flex-row items-center">
         <p className="text-3xl font-bold flex-1">
           {thaiName} ({ingredient}){" "}
-          <div className="badge">
-            ราคาวันนี้ 11.3 บาท / ตัน
-          </div>
+          <div className="badge">ราคาวันนี้ 11.3 บาท / ตัน</div>
         </p>
         <p className="text-xs">
           ข้อมูลล่าสุด {dayjs().format("DD-MM-YYYY HH:mm")}

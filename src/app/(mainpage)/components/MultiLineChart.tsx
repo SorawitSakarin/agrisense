@@ -21,9 +21,16 @@ ChartJS.register(
 );
 
 interface LineChartProps {
-  datasets: any;
+  datasets: {
+    label: string;
+    data: number[];
+    fill: boolean;
+    borderColor: string;
+    tension: number;
+  }[];
   title: string;
 }
+
 export default function MultiLineChart({ datasets, title }: LineChartProps) {
   const labels = [
     "January",

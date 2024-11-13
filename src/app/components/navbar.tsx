@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AiOutlineMenuFold } from "react-icons/ai";
 import { AiOutlineMenu } from "react-icons/ai";
 interface NavbarProps {
-  setSearch: (search: string) => void;
+  setSearch?: (search: string) => void;
   showSidebar: boolean;
   setShowSidebar: (showSidebar: boolean) => void;
 }
@@ -68,14 +68,16 @@ export default function Navbar({
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </label> */}
-        <div className="form-control">
-          <input
-            type="text"
-            placeholder="Search Ingredient"
-            onChange={(e) => setSearch(e.target.value)}
-            className="input input-bordered w-24 md:w-auto"
-          />
-        </div>
+        {setSearch && (
+          <div className="form-control">
+            <input
+              type="text"
+              placeholder="Search Ingredient"
+              onChange={(e) => setSearch(e.target.value)}
+              className="input input-bordered w-24 md:w-auto"
+            />
+          </div>
+        )}
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}

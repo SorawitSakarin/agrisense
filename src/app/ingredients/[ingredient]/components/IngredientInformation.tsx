@@ -51,7 +51,7 @@ export default function IngredientInformation({
         popover: {
           title: "Today Price",
           description:
-            "The price of ingredients today. The unit is baht per tann.",
+            "The price of ingredients today. The unit is baht per ton.",
         },
       },
       {
@@ -59,7 +59,7 @@ export default function IngredientInformation({
         popover: {
           title: "Tomorrow Price By AI",
           description:
-            "The price of ingredients Tomorrow. Just trust our AI!!. The unit is baht per tann.",
+            "The price of ingredients Tomorrow. Just trust our AI!!. The unit is baht per ton.",
         },
       },
       {

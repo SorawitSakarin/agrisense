@@ -88,7 +88,11 @@ export default function Home() {
   });
 
   useEffect(() => {
-    driverObj.drive();
+    const visited = localStorage.getItem("visited-mainpage");
+    if (!visited) {
+      driverObj.drive();
+      localStorage.setItem("visited-mainpage", "true");
+    }
   }, []);
   return (
     <div>

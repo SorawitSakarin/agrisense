@@ -98,7 +98,11 @@ export default function IngredientInformation({
   });
 
   useEffect(() => {
-    driverObj.drive();
+    const visited = localStorage.getItem("visited-ingredient");
+    if (!visited) {
+      driverObj.drive();
+      localStorage.setItem("visited-ingredient", "true");
+    }
   }, []);
   return (
     <div className="bg-base-100 py-4 px-8 flex flex-col gap-4 w-full">

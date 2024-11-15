@@ -8,6 +8,7 @@ import IngredientInformation from "./components/IngredientInformation";
 
 export default function Page({ params }: { params: { ingredient: string } }) {
   const [showSidebar, setShowSidebar] = useState(true);
+
   if (params.ingredient !== "corn") {
     return (
       <div>
@@ -28,6 +29,7 @@ export default function Page({ params }: { params: { ingredient: string } }) {
       </div>
     );
   }
+
   return (
     <div>
       <Navbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 
 export default function FactorInformation() {
   return (
-    <div className="flex flex-col gap-4 w-full pt-8">
+    <div id="reference" className="flex flex-col gap-4 w-full pt-8">
       <p className="text-2xl font-bold">
         ข้อมูลอ้างอิง
       </p>

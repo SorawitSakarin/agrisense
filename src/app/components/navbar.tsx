@@ -16,7 +16,7 @@ export default function Navbar({
   setShowSidebar,
 }: NavbarProps) {
   return (
-    <div className="navbar bg-gradient-to-r from-blue-500 to-blue-800 px-4">
+    <div id="nav-bar" className="navbar bg-gradient-to-r from-blue-500 to-blue-800 px-4">
       {showSidebar ? (
         <AiOutlineMenuFold
           className="text-white hover:cursor-pointer mr-4"
@@ -69,7 +69,7 @@ export default function Navbar({
           </svg>
         </label> */}
         {setSearch && (
-          <div className="form-control">
+          <div id="search-input" className="form-control">
             <input
               type="text"
               placeholder="Search Ingredient"

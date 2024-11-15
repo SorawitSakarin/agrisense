@@ -22,7 +22,10 @@ export default function AllIngredients({ search }: { search: string }) {
         </p>
       </div>
       <div className="flex flex-col md:flex-row gap-4">
-        <div className="stats stats-vertical md:stats-horizontal shadow">
+        <div
+          id="stat-yoy"
+          className="stats stats-vertical md:stats-horizontal shadow"
+        >
           <div className="stat">
             <div className="stat-figure text-red-500">
               <svg
@@ -68,7 +71,10 @@ export default function AllIngredients({ search }: { search: string }) {
           </div>
         </div>
         <p className="text-xl font-bold"> Suggestion</p>
-        <div className="stats stats-vertical md:stats-horizontal shadow">
+        <div
+          id="stat-suggestion"
+          className="stats stats-vertical md:stats-horizontal shadow"
+        >
           <div className="stat">
             <div className="stat-title flex gap-2">
               <PiBreadBold width={80} /> Carbohydrate
@@ -98,87 +104,90 @@ export default function AllIngredients({ search }: { search: string }) {
           </div>
         </div>
       </div>
-      <div className="gap-4 flex flex-col">
-      {Object.values(INGREDIENT_DATA).map((ingredient) => {
-        if (
-          search &&
-          !ingredient.thaiName.toLowerCase().includes(search.toLowerCase()) &&
-          !ingredient.name.toLowerCase().includes(search.toLowerCase())
-        )
-          return null;
-        return (
-          <div
-            key={ingredient.name}
-            className="flex items-center gap-4 border-2 border-blue-200 rounded-xl whitespace-nowrap overflow-x-scroll"
-          >
-            <div className="md:flex-1 border-r-2 border-blue-100">
-              <div className="h-[240px] w-full rounded-xl p-4">
-                <div className="flex gap-4 justify-between">
-                  <div className="flex gap-4">
-                    <p className="font-semibold">
-                      {ingredient.thaiName}: ({ingredient.name}){" "}
-                    </p>
+      <div id="all-ingredients" className="gap-4 flex flex-col">
+        {Object.values(INGREDIENT_DATA).map((ingredient) => {
+          if (
+            search &&
+            !ingredient.thaiName.toLowerCase().includes(search.toLowerCase()) &&
+            !ingredient.name.toLowerCase().includes(search.toLowerCase())
+          )
+            return null;
+          return (
+            <div
+              key={ingredient.name}
+              className="flex items-center gap-4 border-2 border-blue-200 rounded-xl whitespace-nowrap overflow-x-scroll"
+            >
+              <div className="md:flex-1 border-r-2 border-blue-100">
+                <div className="h-[240px] w-full rounded-xl p-4">
+                  <div className="flex gap-4 justify-between">
+                    <div className="flex gap-4">
+                      <p className="font-semibold">
+                        {ingredient.thaiName}: ({ingredient.name}){" "}
+                      </p>
 
-                    <div className="badge badge-outline">
-                      <p>{ingredient.source}</p>
+                      <div className="badge badge-outline">
+                        <p>{ingredient.source}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <p>ราคาวันนี้ {ingredient.price[13]} บาท / ตัน</p>
+                      <Link
+                        href={`/ingredients/${ingredient.name.toLowerCase()}`}
+                        id="link-to-ingredient"
+                      >
+                        <GoLinkExternal className="hover:cursor-pointer" />
+                      </Link>
                     </div>
                   </div>
-                  <div className="flex gap-4">
-                    <p>ราคาวันนี้ {ingredient.price[13]} บาท / ตัน</p>
-                    <Link
-                      href={`/ingredients/${ingredient.name.toLowerCase()}`}
-                      target="_blank"
-                    >
-                      <GoLinkExternal className="hover:cursor-pointer" />
-                    </Link>
+                  <div className="overflow-x-auto">
+                    <table id="supplier-table" className="table">
+                      <thead className="font-bold text-md">
+                        <tr>
+                          <th></th>
+                          <th>{faker.string.alpha(3).toUpperCase()}</th>
+                          <th>{faker.string.alpha(3).toUpperCase()}</th>
+                          <th>{faker.string.alpha(3).toUpperCase()}</th>
+                        </tr>
+                      </thead>
+                      <tbody className="font-semibold text-sm">
+                        <tr className="bg-base-300">
+                          <th>พรุ่งนี้</th>
+                          <td>{(ingredient.price[14] * 0.95).toFixed(1)} </td>
+                          <td>{ingredient.price[14]} </td>
+                          <td>{(ingredient.price[14] * 1.05).toFixed(1)} </td>
+                        </tr>
+                        <tr>
+                          <th>วันนี้</th>
+                          <td>{(ingredient.price[13] * 0.95).toFixed(1)} </td>
+                          <td>{ingredient.price[13]} </td>
+                          <td>{(ingredient.price[13] * 1.05).toFixed(1)} </td>
+                        </tr>
+                        <tr>
+                          <th>เมื่อวาน</th>
+                          <td>{(ingredient.price[12] * 0.95).toFixed(1)} </td>
+                          <td>{ingredient.price[12]} </td>
+                          <td>{(ingredient.price[12] * 1.05).toFixed(1)} </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
-                <div className="overflow-x-auto">
-                  <table className="table">
-                    <thead className="font-bold text-md">
-                      <tr>
-                        <th></th>
-                        <th>{faker.string.alpha(3).toUpperCase()}</th>
-                        <th>{faker.string.alpha(3).toUpperCase()}</th>
-                        <th>{faker.string.alpha(3).toUpperCase()}</th>
-                      </tr>
-                    </thead>
-                    <tbody className="font-semibold text-sm">
-                      <tr className="bg-base-300">
-                        <th>พรุ่งนี้</th>
-                        <td>{(ingredient.price[14] * 0.95).toFixed(1)} </td>
-                        <td>{ingredient.price[14]} </td>
-                        <td>{(ingredient.price[14] * 1.05).toFixed(1)} </td>
-                      </tr>
-                      <tr>
-                        <th>วันนี้</th>
-                        <td>{(ingredient.price[13] * 0.95).toFixed(1)} </td>
-                        <td>{ingredient.price[13]} </td>
-                        <td>{(ingredient.price[13] * 1.05).toFixed(1)} </td>
-                      </tr>
-                      <tr>
-                        <th>เมื่อวาน</th>
-                        <td>{(ingredient.price[12] * 0.95).toFixed(1)} </td>
-                        <td>{ingredient.price[12]} </td>
-                        <td>{(ingredient.price[12] * 1.05).toFixed(1)} </td>
-                      </tr>
-                    </tbody>
-                  </table>
+              </div>
+              <div className="w-[456px]">
+                <div
+                  id="line-chart"
+                  className="h-[240px] w-full rounded-xl p-2"
+                >
+                  <LineChart
+                    days={[...days, "Tomorrow"]}
+                    label={ingredient.thaiName}
+                    dataValue={ingredient.price}
+                  />
                 </div>
               </div>
             </div>
-            <div className="w-[456px]">
-              <div className="h-[240px] w-full rounded-xl p-2">
-                <LineChart
-                  days={[...days, "Tomorrow"]}
-                  label={ingredient.thaiName}
-                  dataValue={ingredient.price}
-                />
-              </div>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
       </div>
     </div>
   );

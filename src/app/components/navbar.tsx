@@ -1,6 +1,7 @@
 "use client";
 
 import { APP_NAME } from "@/app/utils/constants";
+import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineMenuFold } from "react-icons/ai";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -16,58 +17,36 @@ export default function Navbar({
   setShowSidebar,
 }: NavbarProps) {
   return (
-    <div id="nav-bar" className="navbar bg-gradient-to-r from-blue-500 to-blue-800 px-4">
+    <div
+      id="nav-bar"
+      className="navbar bg-gradient-to-r from-blue-500 to-blue-800 px-4"
+    >
       {showSidebar ? (
         <AiOutlineMenuFold
-          className="text-white hover:cursor-pointer mr-4"
+          className="hidden md:flex text-white hover:cursor-pointer mr-4"
           onClick={() => setShowSidebar(false)}
         />
       ) : (
         <AiOutlineMenu
-          className="text-white hover:cursor-pointer mr-4"
+          className="hidden md:flex text-white hover:cursor-pointer mr-4"
           onClick={() => setShowSidebar(true)}
         />
       )}
+      <Link href="/">
+        <Image
+          src="/agrisense_ai.png"
+          alt="Agrisense logo"
+          className="bg-white rounded-full md:mr-2"
+          width={40}
+          height={40}
+        />
+      </Link>
       <div className="flex-1">
         <Link href="/" passHref legacyBehavior>
           <a className="btn btn-ghost text-xl text-white">{APP_NAME}</a>
         </Link>
       </div>
       <div className="flex-none gap-2">
-        {/* <label className="flex cursor-pointer gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-          </svg>
-          <input
-            type="checkbox"
-            value="night"
-            className="toggle theme-controller"
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </label> */}
         {setSearch && (
           <div id="search-input" className="form-control">
             <input
